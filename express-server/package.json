@@ -1,0 +1,23 @@
+{
+  "name": "mondawindow2.0",
+  "version": "1.0.0",
+  "description": "Monda Window Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "local": "heroku local web"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.5",
+    "nodemon": "^1.14.12",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
+  }
+}
