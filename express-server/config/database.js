@@ -1,4 +1,4 @@
-module.export = {
-  database: 'mongodb://localhost:37017/monda';
-  secret: 'p4ssw0rd';
+module.exports = {
+  database: 'mongodb://admin:admin@ds231228.mlab.com:31228/testsandbox',
+  secret: 'p4ssw0rd'
 }
