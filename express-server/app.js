@@ -6,23 +6,31 @@ const passport   = require('passport');
 const mongoose   = require('mongoose');
 const config     = require('./config/database');
 
-// Connect to database
+//Connect to databse
 mongoose.connect(config.database);
 
 mongoose.connection.on('error', (err) => {
-  console.log('database error ' + config.database);
+  console.log('database error: ' + config.database);
 });
 
-const app = express();
+const app   = express();
 
-const users = require('./routes/users');
+const users = require('./routes/users')
 
-// const port = 3000;
+//Port
+// const port  = 3000;
 const port = process.env.PORT || 8080;
 app.use(cors());
 
-// Pass incoming request body
+/*
+Body Parse Middleware
+Parse incoming request body
+*/
 app.use(bodyParser.json());
+/*
+Get ExpressJS module from 
+https://enable-cors.org/server_expressjs.html
+*/
 
 // Passport middleware
 app.use(passport.initialize());
@@ -30,21 +38,23 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-// Public folder will contains all static files(js, html, css, json etc)
-// Static files are dumped from Angular front end
+app.use('/users', users);
+
+//Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Basic route
+//Index routes
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
-// Take care all unauthorized enpoints from nodejs side
+// Added this to handle undefined routes
 app.get('*', (req, res) => {
+  // res.sendFile(path.join(__dirname, 'public/index.html'));
   res.redirect('/');
 });
 
-// Start server
+//Start server
 app.listen(port, () => {
-  console.log('Server started on port ', + port);
-})
+  console.log('Server started on port ' + port);
+});
