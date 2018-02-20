@@ -33,3 +33,18 @@ require('./config/passport')(passport);
 // Public folder will contains all static files(js, html, css, json etc)
 // Static files are dumped from Angular front end
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Basic route
+app.get('/', (req, res) => {
+  res.send('Invalid Endpoint');
+});
+
+// Take care all unauthorized enpoints from nodejs side
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
+
+// Start server
+app.listen(port, () => {
+  console.log('Server started on port ', + port);
+})
